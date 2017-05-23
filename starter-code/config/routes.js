@@ -13,21 +13,27 @@ function authenticatedUser(req, res, next) {
   res.redirect('/login');
 }
 
+function unAuthenticatedUser(req, res, next) {
+  if(!req.isAuthenticated()) return next();
+  req.flash('errorMessage', 'You are already logged in!')
+  res.redirect('/');
+}
+
 router.route('/')
   .get(staticsController.home);
 
 router.route('/signup')
-  .get(usersController.getSignup)
-  .post(usersController.postSignup)
+  .get(unAuthenticatedUser, usersController.getSignup)
+  .post(usersController.postSignup);
 
 router.route('/login')
-  .get(usersController.getLogin)
-  .post(usersController.postLogin)
+  .get(unAuthenticatedUser, usersController.getLogin)
+  .post(usersController.postLogin);
 
-router.route("/logout")
-  .get(usersController.getLogout)
+router.route('/logout')
+  .get(authenticatedUser, usersController.getLogout);
 
-router.route("/secret")
-.get(authenticatedUser, usersController.getSecret)
+router.route('/secret')
+  .get(authenticatedUser, usersController.getSecret);
 
 module.exports = router
