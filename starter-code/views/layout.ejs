@@ -24,11 +24,11 @@
           <ul class="nav navbar-nav navbar-right">
             <% if (currentUser) { %>
             <li><a href="/logout">Logout</a></li>
+            <li><a href="/secret">Secret page (only if authenticated)</a></li>
             <% } else { %>
             <li><a href="/login">Login</a></li>
             <li><a href="/signup">Signup</a></li>
             <% } %>
-            <li><a href="/secret">Secret page (only if authenticated)</a></li>
           </ul>
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->

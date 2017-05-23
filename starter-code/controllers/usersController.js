@@ -42,6 +42,7 @@ function getLogout(req, res) {
 
 // Restricted page
 function getSecret(req, res){
+  res.render('secret.ejs');
 }
 
 module.exports = {
